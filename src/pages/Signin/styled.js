@@ -6,6 +6,7 @@ export const PageArea = styled.div`
         border-radius: 3px;
         padding: 10px;
         box-shadow: 0px 0px 3px #999;
+        margin-bottom: 40px;
 
         .area {
             display: flex;
@@ -37,6 +38,11 @@ export const PageArea = styled.div`
                         border:  1px solid #333;
                         color: #333;
                     }
+                }
+
+                .check {
+                    float: left;
+                    width: auto;
                 }
 
                 button {
