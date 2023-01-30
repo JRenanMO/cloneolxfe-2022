@@ -1,7 +1,86 @@
+import Cookies from "js-cookie";
+import qs from 'qs';
+import { json } from "react-router-dom";
+
+const BASEAPI = '';
+
+const apiFetchPost = async(endpoint, body) => {
+    if (!body.token) {
+        let token = Cookies.get('token');
+        if (token) {
+            body.token = token;
+        }
+    }
+    const res = await fetch(BASEAPI + endpoint, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    });
+    const json = await res.json();
+    if (json.notallowed) {
+        window.location.href = '/signin'
+        return;
+    }
+    return json;
+    //http//meudominio.com/signin isto aqui que vai sair da minha maquina
+
+}
+// cada coisa que colocar e um significado para somar no back - end
+// exemplo https://dashboad.heroku.com -> BASEAPI
+// /aut/heroku/callback -> endpoint      &
+// code=... ... ... ... ...              ?
+//state=.. .. .. ... ... isto e fundamento de rede em protocolo de si.
+const apiFetchGet = async(endpoint, body = []) => {
+    if (!body.token) {
+        let token = Cookies.get('token');
+        if (token) {
+            body.token = token;
+        }
+    }
+    const res = await fetch(`${BASEAPI + endpoint}?${qs.stringify(body)}`);
+    const json = await res.json();
+    if (json.notallowed) {
+        window.location.href = '/signin'
+        return;
+    }
+    return json;
+    //http//meudominio.com/signin isto aqui que vai sair da minha maquina
+
+}
+
 const OlxAPI = {
     login: async (email, password) => {
-        // chamanda API - backEnd
-        return {error:"Não foi feito login"};
+        const json = await apiFetchPost(
+            '/user/signin',
+            {
+                email,
+                password
+            }
+        );
+        return json;
+    },
+
+    register: async (name, stateloc, email, password) => {
+        const json = await apiFetchPost(
+            'user/signup',
+            {
+                name,
+                state: stateloc,
+                email,
+                password
+            }
+        );
+        return json;
+    },
+
+    getStates: async () => {
+        const json = await apiFetchGet(
+            '/states'
+        );
+        return json.state;
     }
 
 }

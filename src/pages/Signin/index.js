@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { PageArea } from './styled'
-import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents';
+import { PageContainer, 
+    PageTitle, 
+    ErrorMessage 
+} from '../../components/MainComponents';
 import { doLogin } from '../../helpers/AuthHandler';
 import useAPI from '../../helpers/OlxAPI';
 
@@ -38,25 +41,44 @@ const Page = () => {
                 <label className="area">
                     <div className="area--title">E-mail</div>
                     <div className="area--input">
-                    <input type="email" />  
+                    <input 
+                    type="email" 
+                    disabled={disabled}
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                    />  
                     </div>
                 </label>
                 <label className="area">
                     <div className="area--title">Senha</div>
                     <div className="area--input">
-                    <input type="password" />  
+                    <input 
+                    type="password" 
+                    disabled={disabled}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    />  
                     </div>
                 </label>
                 <label className="area">
                     <div className="area--title">Lembrar a Senha</div>
                     <div className="area--input">
-                    <input type="checkbox"className='check' />  
+                    <input 
+                    type="checkbox"
+                    className='check' 
+                    disabled={disabled}
+                    checked={rememberPassword}
+                    onChange={() => setRememberPassword(!rememberPassword)}
+                    required
+                    />  
                     </div>
                 </label>
                 <label className="area">
                     <div className="area--title"></div>
                     <div className="area--input">
-                    <button>Fazer Login</button> 
+                    <button disabled={disabled}>Fazer Login</button> 
                     </div>
                 </label>
             </form>
@@ -65,4 +87,4 @@ const Page = () => {
     )
 }
 
-export default Page
+export default Page;
