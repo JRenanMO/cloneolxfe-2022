@@ -96,6 +96,14 @@ const OlxAPI = {
             options
         );
         return json;
+    },
+
+    getAd: async (id, otherAds = false) => {
+        const json = await apiFetchGet(
+            '/ad/item',
+            { id, otherAds }
+        );
+        return json;
     }
 
 };
