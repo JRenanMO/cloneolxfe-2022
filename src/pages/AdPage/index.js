@@ -7,7 +7,7 @@ import {
     PageArea, 
     Fake,
     OthersArea,
-    BraedChumb
+    BreadChumb
 } from './styled'
 import { PageContainer } from '../../components/MainComponents';
 import { 
