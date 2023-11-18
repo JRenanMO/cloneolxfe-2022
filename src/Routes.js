@@ -5,7 +5,7 @@ import RouterHandler from "./components/RouterHandler"
 import Home from './pages/Home'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
-import SignIn from './pages/Signin'
+import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import AdPage from './pages/AdPage'
 
